@@ -90,7 +90,7 @@ class Email {
     return Object.keys(userParameters || {})
       .filter(function (param) {
         // don't send private variables
-        return param.substring(0, 1) !== "_";
+        return param.substring(0, 1) !== "_" && param.toLowerCase().indexOf('recaptcha') === -1;
       })
       .reduce(function (message, param) {
         // uppercase the field names and add each parameter value

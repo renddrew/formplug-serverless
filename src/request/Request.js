@@ -87,7 +87,7 @@ class Request {
 
     const customParameters = Object.keys(this.userParameters).filter(
       (param) => {
-        return param.substring(0, 1) !== "_";
+        return param.substring(0, 1) !== "_" && param.toLowerCase().indexOf('recaptcha') === -1;
       }
     );
 
@@ -168,7 +168,10 @@ class Request {
   }
 
   _buildRecaptcha(params) {
-    if (params && "_recaptcha" in params) {
+    if (params && params["g-recaptcha-response"]) {
+      return params["g-recaptcha-response"];
+    }
+    if (params && params["_recaptcha"]) {
       return params["_recaptcha"];
     }
   }

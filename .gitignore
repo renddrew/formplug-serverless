@@ -1,5 +1,6 @@
 # Misc
 *.log
+.DS_Store
 
 # Package directories
 node_modules
