@@ -7,7 +7,7 @@ module.exports.isWebsite = (string) => {
   } catch (e) {
     // Keeping the regex validation as a fallback to avoid
     // a backwards-incompatible behavior change for incomplete URLs.
-    return /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/.test(
+    return /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/.test(
       string
     );
   }

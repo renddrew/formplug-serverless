@@ -40,8 +40,10 @@ _cc | Email addresses to receive a carbon copy. | Y | N
 _bcc | Email addresses to receive a blind carbon copy. | Y | N
 _replyTo | Email addresses to set as reply to addresses. | Y | N
 _honeypot | A spam prevention field that should be hidden for regular website users. The submission will be ignored if the the _honeypot input is present and not empty. | / | N
-_recaptcha | User token from Google reCaptcha v3. | / | N
+_recaptcha | User token from Google reCaptcha v2 or v3. | / | N
 _redirect | A URL to redirect users to after a successful form submission. | / | N
+
+** Note that in this fork, Reply to is set / overridden by the supplied "email" field ** 
 
 ### AJAX
 Append `format=json` to the query string to get responses back in JSON with a CORS allow all origin header.
@@ -64,11 +66,12 @@ A honeypot field can be used as an easy to setup spam prevention measure. If the
 ```
 
 #### reCaptcha
-Google's [reCaptcha v3](https://developers.google.com/recaptcha/docs/v3) can be integrated for advanced spam prevention. This validates each form submission invisibly based on user interactions with your site. To setup, provide your site secret key in `config.json` as `RECAPTCHA_SECRET_KEY` and send the response token from `execute` as a `_recaptcha` field on each form submission.
+Google's v2 or [reCaptcha v3](https://developers.google.com/recaptcha/docs/v3) can be integrated for advanced spam prevention. This validates each form submission invisibly based on user interactions with your site. To setup, provide your site secret key in `config.json` as `RECAPTCHA_SECRET_KEY` and send the response token from `execute` as a `_recaptcha` field on each form submission.
 
 ```html
 <script src="https://www.google.com/recaptcha/api.js?render=RECAPTCHA_SECRET_KEY"></script>
 <script>
+// v3
 grecaptcha.ready(function() {
     grecaptcha.execute('RECAPTCHA_SECRET_KEY').then(function(token) {
        // send token as _recaptcha with the rest of the form

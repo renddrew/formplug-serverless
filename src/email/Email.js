@@ -4,13 +4,22 @@ const validation = require("../lib/validation");
 
 class Email {
   constructor(sender, senderArn, subject, recipients, userParameters) {
+
     this.Source = this._buildSenderSource(sender, senderArn);
-    (this.ReplyToAddresses = recipients.replyTo),
-      (this.Destination = {
-        ToAddresses: [recipients.to],
-        CcAddresses: recipients.cc,
-        BccAddresses: recipients.bcc,
-      });
+
+    // set replyto from email user param
+    if (userParameters.email) {
+      this.ReplyToAddresses = [userParameters.email];
+    } else {
+      this.ReplyToAddresses = recipients.replyTo
+    }
+
+    this.Destination = {
+      ToAddresses: [recipients.to],
+      CcAddresses: recipients.cc,
+      BccAddresses: recipients.bcc,
+    };
+
     this.Message = {
       Subject: {
         Data: subject,
