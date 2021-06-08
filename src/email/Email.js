@@ -2,13 +2,13 @@ const { isEmail } = require("validator");
 const InternalServerError = require("../error/InternalServerError");
 
 class Email {
-  constructor(sender, senderArn, subject, recipients, userParameters) {
+  constructor(sender, senderArn, subject, recipients, params) {
 
-    this.Source = this._buildSenderSource(sender, senderArn);
+    this.Source = this._source(sender, senderArn);
 
     // set replyto from email user param
-    if (userParameters.email) {
-      this.ReplyToAddresses = [userParameters.email];
+    if (params.email) {
+      this.ReplyToAddresses = [params.email];
     } else {
       this.ReplyToAddresses = recipients.replyTo
     }

@@ -81,11 +81,9 @@ class Request {
       return new UnprocessableEntityError("Invalid website URL in '_redirect'");
     }
 
-    const customParameters = Object.keys(this.userParameters).filter(
-      (param) => {
-        return param.substring(0, 1) !== "_" && param.toLowerCase().indexOf('recaptcha') === -1;
-      }
-    );
+    const customParameters = Object.keys(this.body).filter((param) => {
+      return param.substring(0, 1) !== "_" && param.toLowerCase().indexOf('recaptcha') === -1;
+    });
 
     if (customParameters.length < 1) {
       return new UnprocessableEntityError(`Expected at least one custom field`);
